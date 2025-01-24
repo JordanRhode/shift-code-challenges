@@ -22,13 +22,10 @@ class Queue {
 	};
 }
 
-const INPUT = ["This", "little", "piggy", "ate", "roast", "beef"];
-const OUTPUT = "This little piggy ate roast beef";
-
-async function enqueue() {
+async function enqueue(input: string[]) {
 	const myQueue = new Queue();
 
-	await Promise.all(INPUT.map(async (item) => await myQueue.Enqueue(item)));
+	await Promise.all(input.map(async (item) => await myQueue.Enqueue(item)));
 
 	let queueOutput = "";
 	while (myQueue.Count() > 0) {
@@ -38,12 +35,12 @@ async function enqueue() {
 	return queueOutput;
 }
 
-async function enqueueFunction() {
+async function enqueueFunction(input: string[]) {
 	const myQueue = new Queue();
 	const toes = async (piggy: string) => piggy;
 
 	await Promise.all(
-		INPUT.map(async (item) => await myQueue.Enqueue(() => toes(item))),
+		input.map(async (item) => await myQueue.Enqueue(() => toes(item))),
 	);
 
 	let queueOutput = "";
@@ -54,10 +51,10 @@ async function enqueueFunction() {
 	return queueOutput;
 }
 
-test("enqueue", async () => {
-	expect(await enqueue()).toBe(OUTPUT);
-});
+test("queue", async () => {
+	const input = ["This", "little", "piggy", "ate", "roast", "beef"];
+	const output = "This little piggy ate roast beef";
 
-test("enqueueFunction", async () => {
-	expect(await enqueue()).toBe(OUTPUT);
+	expect(await enqueue(input)).toBe(output);
+	expect(await enqueue(input)).toBe(output);
 });
