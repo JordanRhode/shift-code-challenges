@@ -2,7 +2,7 @@ class Queue {
 	queue: any[] = [];
 
 	Enqueue = async (item: any) => {
-		if (typeof item === "function") {
+		if (typeof item === 'function') {
 			this.queue.push(await item());
 		} else {
 			this.queue.push(item);
@@ -27,10 +27,10 @@ async function enqueue(input: string[]) {
 
 	await Promise.all(input.map(async (item) => await myQueue.Enqueue(item)));
 
-	let queueOutput = "";
+	let queueOutput = '';
 	while (myQueue.Count() > 0) {
 		queueOutput += myQueue.Dequeue();
-		if (myQueue.Count() > 0) queueOutput += " ";
+		if (myQueue.Count() > 0) queueOutput += ' ';
 	}
 	return queueOutput;
 }
@@ -43,17 +43,17 @@ async function enqueueFunction(input: string[]) {
 		input.map(async (item) => await myQueue.Enqueue(() => toes(item))),
 	);
 
-	let queueOutput = "";
+	let queueOutput = '';
 	while (myQueue.Count() > 0) {
 		queueOutput += myQueue.Dequeue();
-		if (myQueue.Count() > 0) queueOutput += " ";
+		if (myQueue.Count() > 0) queueOutput += ' ';
 	}
 	return queueOutput;
 }
 
-test("queue", async () => {
-	const input = ["This", "little", "piggy", "ate", "roast", "beef"];
-	const output = "This little piggy ate roast beef";
+test('queue', async () => {
+	const input = ['This', 'little', 'piggy', 'ate', 'roast', 'beef'];
+	const output = 'This little piggy ate roast beef';
 
 	expect(await enqueue(input)).toBe(output);
 	expect(await enqueue(input)).toBe(output);
