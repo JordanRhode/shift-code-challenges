@@ -1,0 +1,19 @@
+{
+	"name": "shift-code-challenges",
+	"version": "1.0.0",
+	"scripts": {
+		"test": "jest"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/JordanRhode/shift-code-challenges.git"
+	},
+	"author": "",
+	"license": "UNLICENSED",
+	"dependencies": {
+		"@types/jest": "^29.5.14",
+		"prettier": "^3.4.2",
+		"ts-jest": "^29.2.5",
+		"ts-node": "^10.9.2"
+	}
+}

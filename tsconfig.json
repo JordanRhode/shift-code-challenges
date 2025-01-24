@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"outDir": "dist",
+		"allowJs": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"resolveJsonModule": true,
+		"noImplicitReturns": true,
+		"esModuleInterop": true,
+		"target": "esnext",
+		"module": "commonjs",
+		"baseUrl": "tests"
+	},
+	"include": ["tests/**/*"],
+	"exclude": ["node_modules"]
+}
