@@ -5,38 +5,24 @@ on:
     branches: ["main"]
 
 jobs:
-  cache-node-modules:
+  install-dependencies:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: actions/cache@v4
-        with:
-          path: ./node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install UI dependencies
-        shell: bash
-        if: steps.cache-node_modules.outputs.cache-hit != 'true'
-        run: npm ci
+      - name: Install dependencies
+        uses: ./.github/workflows/actions/install-dependencies/
 
   run-tests:
     runs-on: ubuntu-latest
     needs: cache-node-modules
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
+      - name: Install dependencies
+        uses: ./.github/workflows/actions/install-dependencies/
 
       - name: Run Tests
         run: npm test
