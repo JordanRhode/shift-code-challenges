@@ -1,7 +1,3 @@
-/**
- * Link to challenge: https://shiftparadigm.slack.com/archives/C06R174JN6P/p1728676802694129
- * Challenge Date: 2024-09-11
- */
 class Queue {
 	queue: any[] = [];
 
