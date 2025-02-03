@@ -34,9 +34,41 @@ function execute(input: number[]): number[] {
 	return sorted;
 }
 
+function try2(input: number[]) {
+	const roundedNumbers = input.map((number) => {
+		const [integerPart, fractionalPart] = number.toString().split('.');
+		if (!fractionalPart || fractionalPart.length <= 2)
+			return parseFloat(number.toFixed(2));
+		console.log(integerPart, fractionalPart);
+
+		let fractionalNumbers = Array.from(fractionalPart, Number);
+
+		let roundUp = false;
+		for (var i = fractionalNumbers.length - 1; i >= 0; i--) {
+			const currentValue = fractionalNumbers[i];
+			if (1 <= i) {
+				if (roundUp) {
+					roundUp = currentValue === 9;
+					fractionalNumbers[i] = roundUp ? 0 : currentValue + 1;
+				}
+			} else {
+				roundUp = (roundUp ? currentValue + 1 : currentValue) >= 5;
+				fractionalNumbers[i] = 0;
+			}
+		}
+
+		const integerNumber = Number(integerPart) + (roundUp ? 1 : 0);
+		return parseFloat(
+			Number(integerNumber + '.' + fractionalNumbers).toFixed(2),
+		);
+	});
+
+	const sorted = roundedNumbers.sort();
+	return sorted;
+}
 // prettier-ignore
 test("floating-point-rounding", () => {
 	const input = [ 1.07444444444449, 1.07444444444444, 0, -3.00, 1.012222222222, 1.187777777777777, 1.01, 1.999 ];
 	const output = [-3.00, 0.00, 1.01, 1.01, 1.07, 1.08, 1.19, 2.00];
-	expect(execute(input)).toStrictEqual(output);
+	expect(try2(input)).toStrictEqual(output);
 });
